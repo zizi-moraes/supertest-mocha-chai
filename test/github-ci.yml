@@ -1,0 +1,33 @@
+name: Pipeline testes regressivos - API
+
+on: 
+  push: 
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule: 
+    - cron:  '0 8,20 * * *'
+
+jobs: 
+  e2e-tests: 
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js environment
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 18.
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run ServerRest
+        run: |
+          npx serverest@latest &
+          sleep 10 
+
+      - name: Run Tests
+        run: npm run test
