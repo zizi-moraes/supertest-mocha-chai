@@ -31,7 +31,7 @@ describe('User CRUD Suíte - GET Usuários', function () {
   })
 
   it('GET - Listar Usuários - Filtrando por password', async function () {
-    const response = await getUsers({ _this: this, token: generateToken(), password: "123456" })
+    const response = await getUsers({ _this: this, token: generateToken(), password: "teste" })
 
     expect(response.status).to.eql(200)
   })
